@@ -13,8 +13,8 @@ public class AccountController {
     }
 
     public boolean updateAccountById(Long key, String name, AccountStatus status) {
-        Account skill = new Account(key, name, status);
-        return accountRepository.update(skill, key);
+        Account account = new Account(key, name, status);
+        return accountRepository.update(account, key);
     }
 
     public boolean deleteAccountById(Long id) {
