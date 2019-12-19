@@ -74,13 +74,14 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
             Scanner scanner = new Scanner(fr);
             String[] list;
             String name;
-            Long id;
+            Long id = 1L;
             while (scanner.hasNextLine()) {
                 for (String rev : scanner.nextLine().split(END_OF_WORD)) {
                     list = (rev.split(REGEX));
-                    id = Long.parseLong(list[0]);
+//                    id = Long.parseLong(list[0]);
                     name = list[1];
                     accountMap.put(id, new Account(id, name, AccountStatus.valueOf(list[2])));
+                    id++;
                 }
             }
             fr.close();
@@ -89,6 +90,15 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
         }
         return null;
     }
+
+    public Long getLastIndex(){
+        Long lastIndex = 0L;
+        for (Map.Entry<Long, Account> entry : accountMap.entrySet()) {
+            lastIndex = entry.getKey();
+        }
+        return lastIndex;
+    }
+
 
     public void print() {
         try (FileWriter fileWriter = new FileWriter(PATH)) {

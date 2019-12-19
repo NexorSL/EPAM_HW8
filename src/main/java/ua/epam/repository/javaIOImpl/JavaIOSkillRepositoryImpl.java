@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class JavaIOSkillRepositoryImpl implements SkillRepository {
-    private Map<Long, Skill> list = new HashMap<>();
+    private Map<Long, Skill> skillMap = new HashMap<>();
     private static final String PATH = "src\\main\\resources\\skills.txt";
     private static final String END_OF_WORD = ":";
 
@@ -22,7 +22,7 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
             long i = 1;
             while (scanner.hasNextLine()) {
                 for (String rev : scanner.nextLine().split(END_OF_WORD)) {
-                    list.put(i, new Skill(i, rev));
+                    skillMap.put(i, new Skill(i, rev));
                     i++;
                 }
             }
@@ -49,27 +49,27 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
     }
 
     public Skill getById(Long id) {
-        if (list.get(id) == null || id < 0) {
+        if (skillMap.get(id) == null || id < 0) {
             return null;
         }
-        return list.get(id);
+        return skillMap.get(id);
     }
 
     public boolean update(Skill entity, Long id) {
-        if (list.get(id) == null || id < 0 || entity == null) {
+        if (skillMap.get(id) == null || id < 0 || entity == null) {
             return false;
         }
-        list.put(id, entity);
-        write();
+        skillMap.put(id, entity);
+        print();
         return true;
     }
 
     public boolean delete(Long id) {
-        if (list.get(id) == null || id < 0) {
+        if (skillMap.get(id) == null || id < 0) {
             return false;
         }
-        list.remove(id);
-        write();
+        skillMap.remove(id);
+        print();
         return true;
     }
 
@@ -80,7 +80,7 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
             long i = 1;
             while (scanner.hasNextLine()) {
                 for (String rev : scanner.nextLine().split(END_OF_WORD)) {
-                    list.put(i, new Skill(i, rev));
+                    skillMap.put(i, new Skill(i, rev));
                     System.out.println(i + " - " + rev);
                     i++;
                 }
@@ -89,18 +89,25 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return list;
+        return skillMap;
     }
 
-    public void write() {
+    public void print() {
         try (FileWriter fileWriter = new FileWriter(PATH)) {
             String str = "";
-            for (Map.Entry<Long, Skill> entry : list.entrySet()) {
+            for (Map.Entry<Long, Skill> entry : skillMap.entrySet()) {
                 str = str + entry.getValue().getName() + END_OF_WORD;
             }
             fileWriter.write(str);
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+    public Long getLastIndex(){
+        Long lastIndex = 0L;
+        for (Map.Entry<Long, Skill> entry : skillMap.entrySet()) {
+            lastIndex = entry.getKey();
+        }
+        return lastIndex + 1;
     }
 }

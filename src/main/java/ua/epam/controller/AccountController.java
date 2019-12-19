@@ -8,7 +8,7 @@ public class AccountController {
     private JavaIOAccountRepositoryImpl accountRepository = new JavaIOAccountRepositoryImpl();
 
     public boolean addAccount(String newAccount) {
-        Account account = new Account(Account.nextId, newAccount, AccountStatus.Active);
+        Account account = new Account(accountRepository.getLastIndex()+1, newAccount, AccountStatus.Active);
         return accountRepository.create(account);
     }
 
@@ -31,5 +31,8 @@ public class AccountController {
 //    public boolean updateId(){
 //        return accountRepository.updateId();
 //    }
+    public Long getLastIndex(){
+        return accountRepository.getLastIndex();
+    }
 
 }

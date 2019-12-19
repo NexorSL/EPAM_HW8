@@ -7,7 +7,7 @@ public class SkillController {
     private JavaIOSkillRepositoryImpl skillRepository = new JavaIOSkillRepositoryImpl();
 
     public boolean addSkill(String newSkill) {
-        Skill skill = new Skill(Skill.nextId, newSkill);
+        Skill skill = new Skill(skillRepository.getLastIndex(), newSkill);
         return skillRepository.create(skill);
     }
 

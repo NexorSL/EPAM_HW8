@@ -1,7 +1,6 @@
 package ua.epam.model;
 
 public class Account {
-    public static long nextId = 1;
     private long id;
     private String name;
     private AccountStatus accountStatus;
@@ -10,7 +9,6 @@ public class Account {
         this.id = id;
         this.name = name;
         this.accountStatus = accountStatus;
-        nextId++;
     }
 
     public long getId() {

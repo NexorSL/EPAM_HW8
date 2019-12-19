@@ -5,3 +5,6 @@
 5,Ora,Deleted:
 6,Muda,Active:
 7,Fars,Active:
+9,Nox,Active:
+10,Soml,Active:
+11,Ramu,Active:

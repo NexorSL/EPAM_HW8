@@ -3,14 +3,12 @@ package ua.epam.model;
 import java.util.Objects;
 
 public class Skill {
-    public static long nextId = 1;
     private long id;
     private String name;
 
     public Skill(long id, String name) {
         this.id = id;
         this.name = name;
-        nextId++;
     }
 
     public long getId() {
@@ -45,8 +43,6 @@ public class Skill {
 
     @Override
     public String toString() {
-        return "Skill{" +
-                "name='" + name + '\'' +
-                '}';
+        return "Skill{" + name + '}';
     }
 }
