@@ -22,6 +22,7 @@ public class AppView implements ViewRepository {
                 break;
             case 2:
                 skillView.printMenu();
+                break;
             case 3:
                 break;
         }
