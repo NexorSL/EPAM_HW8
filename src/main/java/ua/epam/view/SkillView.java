@@ -16,7 +16,7 @@ public class SkillView implements ViewRepository {
     public void printMenu() {
         Scanner in = new Scanner(System.in);
         long id = 0;
-        int answer = -1;
+        int answer = 5;
         while (answer != 0) {
             System.out.println(X);
             System.out.println(CHOICE);
