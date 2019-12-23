@@ -41,6 +41,7 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     @Override
     public Account getById(Long id) {
+        getAll();
         if (accountMap.get(id) == null || id < 0) {
             return null;
         }
@@ -49,21 +50,23 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     @Override
     public boolean update(Account entity, Long id) {
+        getAll();
         if (accountMap.get(id) == null || id < 0 || entity == null) {
             return false;
         }
         accountMap.put(id, entity);
-        print();
+        updateFile();
         return true;
     }
 
     @Override
     public boolean delete(Long id) {
+        getAll();
         if (accountMap.get(id) == null || id < 0) {
             return false;
         }
         accountMap.remove(id);
-        print();
+        updateFile();
         return true;
     }
 
@@ -74,17 +77,17 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
             Scanner scanner = new Scanner(fr);
             String[] list;
             String name;
-            Long id = 1L;
+            Long id;
             while (scanner.hasNextLine()) {
                 for (String rev : scanner.nextLine().split(END_OF_WORD)) {
                     list = (rev.split(REGEX));
-//                    id = Long.parseLong(list[0]);
+                    id = Long.parseLong(list[0]);
                     name = list[1];
                     accountMap.put(id, new Account(id, name, AccountStatus.valueOf(list[2])));
-                    id++;
                 }
             }
             fr.close();
+            return accountMap;
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -93,20 +96,30 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
 
     public Long getLastIndex(){
         Long lastIndex = 0L;
-        for (Map.Entry<Long, Account> entry : accountMap.entrySet()) {
-            lastIndex = entry.getKey();
+        try {
+            FileReader fr = new FileReader(PATH);
+            Scanner scanner = new Scanner(fr);
+            String[] account;
+            while (scanner.hasNextLine()) {
+                for (String rev : scanner.nextLine().split(END_OF_WORD)) {
+                    account = rev.split(",");
+                    lastIndex = Long.parseLong(account[0]);
+                }
+            }
+            fr.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return lastIndex;
     }
 
 
-    public void print() {
+    public void updateFile() {
         try (FileWriter fileWriter = new FileWriter(PATH)) {
             String str = "";
             for (Map.Entry<Long, Account> entry : accountMap.entrySet()) {
                 str = str + entry.getValue().getId() + REGEX + entry.getValue().getName() + "," + entry.getValue().getAccountStatus() + END_OF_WORD + "\n";
             }
-            System.out.println(str);
             fileWriter.write(str);
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,5 +1,5 @@
 1,Smile,ACTIVE:
-2,Suppy,ACTIVE:
+2,Nolly,BANNED:
 3,Nero,ACTIVE:
 4,Bon,ACTIVE:
 5,Ora,ACTIVE:
@@ -8,3 +8,5 @@
 8,Nox,ACTIVE:
 9,Soml,ACTIVE:
 10,Ramu,ACTIVE:
+11,Soler,DELETED:
+12,Morki,ACTIVE:
