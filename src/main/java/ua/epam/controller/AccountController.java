@@ -2,13 +2,13 @@ package ua.epam.controller;
 
 import ua.epam.model.Account;
 import ua.epam.model.AccountStatus;
-import ua.epam.repository.javaIOImpl.JavaIOAccountRepositoryImpl;
+import ua.epam.repository.javaioimpl.JavaIOAccountRepositoryImpl;
 
 public class AccountController {
     private JavaIOAccountRepositoryImpl accountRepository = new JavaIOAccountRepositoryImpl();
 
-    public boolean addAccount(String newAccount) {
-        Account account = new Account(accountRepository.getLastIndex()+1, newAccount, AccountStatus.Active);
+    public Account addAccount(String newAccount) {
+        Account account = new Account(accountRepository.getLastIndex()+1, newAccount, AccountStatus.ACTIVE);
         return accountRepository.create(account);
     }
 

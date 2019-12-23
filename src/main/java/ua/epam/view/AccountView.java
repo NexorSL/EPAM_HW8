@@ -40,7 +40,7 @@ public class AccountView implements ViewRepository {
                     System.out.print(ENTER_NEW_ACCOUNT);
                     String newAccount = in.next();
                     System.out.println("Account status:\n1 - Active\n2 - Banned\n3 - Deleted");
-                    AccountStatus status = AccountStatus.Active;
+                    AccountStatus status = AccountStatus.ACTIVE;
                     int stat = 0;
                     try {
                         stat = in.nextInt();
@@ -49,13 +49,13 @@ public class AccountView implements ViewRepository {
                     }
                     switch (stat) {
                         case 1:
-                            status = AccountStatus.Active;
+                            status = AccountStatus.ACTIVE;
                             break;
                         case 2:
-                            status = AccountStatus.Banned;
+                            status = AccountStatus.BANNED;
                             break;
                         case 3:
-                            status = AccountStatus.Deleted;
+                            status = AccountStatus.DELETED;
                             break;
                         default:
                             System.out.println("Set Active");

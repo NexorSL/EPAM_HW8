@@ -1,13 +1,16 @@
 package ua.epam.controller;
 
 import ua.epam.model.Skill;
-import ua.epam.repository.javaIOImpl.JavaIOSkillRepositoryImpl;
+import ua.epam.repository.javaioimpl.JavaIOSkillRepositoryImpl;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SkillController {
     private JavaIOSkillRepositoryImpl skillRepository = new JavaIOSkillRepositoryImpl();
 
-    public boolean addSkill(String newSkill) {
-        Skill skill = new Skill(skillRepository.getLastIndex(), newSkill);
+    public Skill addSkill(String newSkill) {
+        Skill skill = new Skill(skillRepository.getLastIndex() + 1, newSkill);
         return skillRepository.create(skill);
     }
 
@@ -25,6 +28,9 @@ public class SkillController {
     }
 
     public void getAll() {
-        skillRepository.getAll();
+        Map<Long, Skill> skillMap = new HashMap<>(skillRepository.getAll());
+        for (Map.Entry<Long, Skill> entry : skillMap.entrySet()){
+            System.out.println(entry.getValue().getId() + " - " + entry.getValue().getName());
+        }
     }
 }

@@ -1,1 +1,1 @@
-Java:Ruby:NodeJs:C++:C#:SQL:Go:
+1,Java:2,Ruby:3,NodeJs:4,C++:5,C#:6,Go:7,Spring:

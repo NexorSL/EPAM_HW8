@@ -1,14 +1,8 @@
 package ua.epam.view;
 
-import ua.epam.controller.DeveloperController;
-import ua.epam.model.Developer;
-import ua.epam.model.Skill;
 import ua.epam.repository.ViewRepository;
-import ua.epam.repository.javaIOImpl.JavaIODeveloperRepositoryImpl;
 
-import java.util.LinkedHashSet;
 import java.util.Scanner;
-import java.util.Set;
 
 public class AppView implements ViewRepository {
 

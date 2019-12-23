@@ -3,13 +3,13 @@ package ua.epam.controller;
 import ua.epam.model.Account;
 import ua.epam.model.Developer;
 import ua.epam.model.Skill;
-import ua.epam.repository.javaIOImpl.JavaIODeveloperRepositoryImpl;
+import ua.epam.repository.javaioimpl.JavaIODeveloperRepositoryImpl;
 
 import java.util.Set;
 
 public class DeveloperController {
     private JavaIODeveloperRepositoryImpl developerRepository = new JavaIODeveloperRepositoryImpl();
-    public boolean addDeveloper(String name, String lastName, Set<Skill> skillSet, Account account) {
+    public Developer addDeveloper(String name, String lastName, Set<Skill> skillSet, Account account) {
         Developer developer = new Developer(developerRepository.getLastIndex()+1, name, lastName, skillSet, account);
         return developerRepository.create(developer);
     }

@@ -1,4 +1,4 @@
-package ua.epam.repository.javaIOImpl;
+package ua.epam.repository.javaioimpl;
 
 import ua.epam.controller.AccountController;
 import ua.epam.controller.SkillController;
@@ -24,9 +24,9 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
     }
 
     @Override
-    public boolean create(Developer entity) {
+    public Developer create(Developer entity) {
         if (entity == null) {
-            return false;
+            return null;
         }
         try {
             FileWriter fileWriter = new FileWriter(PATH, true);
@@ -34,11 +34,11 @@ public class JavaIODeveloperRepositoryImpl implements DeveloperRepository {
             developerMap.put(entity.getId(), entity);
             fileWriter.flush();
             fileWriter.close();
-            return true;
+            return entity;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     @Override

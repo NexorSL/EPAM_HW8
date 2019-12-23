@@ -1,4 +1,4 @@
-package ua.epam.repository.javaIOImpl;
+package ua.epam.repository.javaioimpl;
 
 import ua.epam.model.Account;
 import ua.epam.model.AccountStatus;
@@ -22,9 +22,9 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
     }
 
     @Override
-    public boolean create(Account entity) {
+    public Account create(Account entity) {
         if (entity == null) {
-            return false;
+            return null;
         }
         try {
             FileWriter fileWriter = new FileWriter(PATH, true);
@@ -32,11 +32,11 @@ public class JavaIOAccountRepositoryImpl implements AccountRepository {
             accountMap.put(entity.getId(), entity);
             fileWriter.flush();
             fileWriter.close();
-            return true;
+            return entity;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     @Override
