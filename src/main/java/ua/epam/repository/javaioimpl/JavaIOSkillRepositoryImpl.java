@@ -70,7 +70,7 @@ public class JavaIOSkillRepositoryImpl implements SkillRepository {
                     if(skillId == id){
                         skillName = skillParse[1];
                         skill = new Skill(skillId, skillName);
-                        skillMap.put((skillId), skill);
+//                        skillMap.put((skillId), skill);
                         return skill;
                     }
                 }

@@ -56,4 +56,16 @@ public class Developer {
     public void setAccount(Account account) {
         this.account = account;
     }
+
+    @Override
+    public String toString() {
+        return "Developer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", skills=" + skills +
+                ", account id=" + account.getId() +
+                ", account name=" + account.getName() +
+                '}';
+    }
 }

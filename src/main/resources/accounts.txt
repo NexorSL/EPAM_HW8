@@ -1,5 +1,4 @@
 1,Smile,ACTIVE:
-2,Nolly,BANNED:
 3,Nero,ACTIVE:
 4,Bon,ACTIVE:
 5,Ora,ACTIVE:
@@ -10,3 +9,10 @@
 10,Ramu,ACTIVE:
 11,Soler,DELETED:
 12,Morki,ACTIVE:
+13,Sorki,ACTIVE:
+14,VL,ACTIVE:
+15,Mira,BANNED:
+16,Exp,DELETED:
+17,Heri,ACTIVE:
+18,Joke,ACTIVE:
+19,Levis,ACTIVE:
