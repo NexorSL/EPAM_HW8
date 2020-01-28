@@ -1,35 +1,33 @@
 package ua.epam.controller;
 
 import ua.epam.model.Skill;
-import ua.epam.repository.javaioimpl.JavaIOSkillRepositoryImpl;
+import ua.epam.service.SkillService;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class SkillController {
-    private JavaIOSkillRepositoryImpl skillRepository = new JavaIOSkillRepositoryImpl();
+    private SkillService skillService = new SkillService();
 
     public Skill addSkill(String newSkill) {
-        Skill skill = new Skill(skillRepository.getLastIndex() + 1, newSkill);
-        return skillRepository.create(skill);
+        Skill skill = new Skill(null, newSkill);
+        return skillService.create(skill);
     }
 
     public boolean updateSkillById(Long key, String name) {
         Skill skill = new Skill(key, name);
-        return skillRepository.update(skill, key);
+        return skillService.update(skill, key);
     }
 
     public boolean deleteSkillById(Long id) {
-        return skillRepository.delete(id);
+        return skillService.delete(id);
     }
 
     public Skill getDataById(Long id) {
-        return skillRepository.getById(id);
+        return skillService.getById(id);
     }
 
     public void getAll() {
-        Map<Long, Skill> skillMap = new HashMap<>(skillRepository.getAll());
-        for (Map.Entry<Long, Skill> entry : skillMap.entrySet()){
+        for (Map.Entry<Long, Skill> entry : skillService.getAll().entrySet()) {
             System.out.println(entry.getValue().getId() + " - " + entry.getValue().getName());
         }
     }

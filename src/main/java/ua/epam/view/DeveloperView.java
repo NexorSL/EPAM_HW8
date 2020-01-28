@@ -69,7 +69,7 @@ public class DeveloperView implements ViewRepository {
                     System.out.println("Your nick:");
                     nickname = in.next();
                     accountController.addAccount(nickname);
-                    developerController.addDeveloper(name, lastName, skillSet, accountController.getAccountById(accountController.getLastIndex()));
+//                    developerController.addDeveloper(name, lastName, skillSet, accountController.getAccountById(accountController.getLastIndex()));
                     skillSet.clear();
                     break;
                 case 2:

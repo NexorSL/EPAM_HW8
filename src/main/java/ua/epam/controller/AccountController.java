@@ -2,17 +2,16 @@ package ua.epam.controller;
 
 import ua.epam.model.Account;
 import ua.epam.model.AccountStatus;
-import ua.epam.model.Skill;
-import ua.epam.repository.javaioimpl.JavaIOAccountRepositoryImpl;
+import ua.epam.service.AccountService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class AccountController {
-    private JavaIOAccountRepositoryImpl accountRepository = new JavaIOAccountRepositoryImpl();
+    private AccountService accountRepository = new AccountService();
 
     public Account addAccount(String newAccount) {
-        Account account = new Account(accountRepository.getLastIndex()+1, newAccount, AccountStatus.ACTIVE);
+        Account account = new Account(null, newAccount, AccountStatus.ACTIVE);
         return accountRepository.create(account);
     }
 
@@ -30,16 +29,9 @@ public class AccountController {
     }
 
     public void getAll() {
-        Map<Long, Account> skillMap = new HashMap<>(accountRepository.getAll());
-        for (Map.Entry<Long, Account> entry : skillMap.entrySet()){
+        for (Map.Entry<Long, Account> entry : accountRepository.getAll().entrySet()){
             System.out.println(entry.getValue().getId() + "," + entry.getValue().getName() + "," + entry.getValue().getAccountStatus());
         }
-    }
-//    public boolean updateId(){
-//        return accountRepository.updateId();
-//    }
-    public Long getLastIndex(){
-        return accountRepository.getLastIndex();
     }
 
 }

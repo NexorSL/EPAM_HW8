@@ -1,11 +1,11 @@
 package ua.epam.model;
 
 public class Account {
-    private long id;
+    private Long id;
     private String name;
     private AccountStatus accountStatus;
 
-    public Account(long id, String name, AccountStatus accountStatus) {
+    public Account(Long id, String name, AccountStatus accountStatus) {
         this.id = id;
         this.name = name;
         this.accountStatus = accountStatus;
