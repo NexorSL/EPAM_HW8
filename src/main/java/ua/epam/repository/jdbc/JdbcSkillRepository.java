@@ -1,5 +1,6 @@
 package ua.epam.repository.jdbc;
 
+import lombok.extern.slf4j.Slf4j;
 import ua.epam.model.Skill;
 import ua.epam.repository.SkillRepository;
 import ua.epam.util.ConnectionPool;
@@ -8,6 +9,7 @@ import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
+@Slf4j
 public class JdbcSkillRepository implements SkillRepository {
 
     private Connection connection;
@@ -22,6 +24,7 @@ public class JdbcSkillRepository implements SkillRepository {
         try(PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1, entity.getName());
             statement.executeUpdate();
+            log.info("Skill added {}", entity);
             return entity;
         } catch (SQLException e){
             e.printStackTrace();
@@ -53,6 +56,7 @@ public class JdbcSkillRepository implements SkillRepository {
             statement.setString(1, entity.getName());
             statement.setLong(2, id);
             statement.executeUpdate();
+            log.info("Skill updated {}", entity);
             return true;
         } catch (SQLException e){
             e.printStackTrace();
@@ -66,6 +70,7 @@ public class JdbcSkillRepository implements SkillRepository {
         try(PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
             statement.executeUpdate();
+            log.info("Skill deleted id={}", id);
             return true;
         } catch (SQLException e){
             e.printStackTrace();

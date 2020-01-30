@@ -4,7 +4,6 @@ import ua.epam.model.Account;
 import ua.epam.model.AccountStatus;
 import ua.epam.service.AccountService;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class AccountController {
