@@ -27,4 +27,8 @@ public class AccountService {
     public Map<Long, Account> getAll(){
        return accountRepository.getAll();
     }
+
+    public Account getByName(String name){
+        return accountRepository.getByName(name);
+    }
 }

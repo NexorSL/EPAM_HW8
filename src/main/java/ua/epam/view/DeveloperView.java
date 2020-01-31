@@ -3,6 +3,7 @@ package ua.epam.view;
 import ua.epam.controller.AccountController;
 import ua.epam.controller.DeveloperController;
 import ua.epam.controller.SkillController;
+import ua.epam.model.Account;
 import ua.epam.model.Developer;
 import ua.epam.model.Skill;
 import ua.epam.repository.ViewRepository;
@@ -51,8 +52,6 @@ public class DeveloperView implements ViewRepository {
                     System.out.println(ENTER_NEW_ACCOUNT + " ");
                     System.out.println(NAME);
                     name = in.next();
-                    System.out.println(LAST_NAME);
-                    lastName = in.next();
                     while (choise != 0) {
                         System.out.println(SELECT_YOUR_SKILLS);
                         System.out.println(EXIT);
@@ -69,33 +68,34 @@ public class DeveloperView implements ViewRepository {
                     System.out.println("Your nick:");
                     nickname = in.next();
                     accountController.addAccount(nickname);
-//                    developerController.addDeveloper(name, lastName, skillSet, accountController.getAccountById(accountController.getLastIndex()));
+                    Account account = accountController.getAccountByName(nickname);
+                    developerController.addDeveloper(name, skillSet, account);
                     skillSet.clear();
                     break;
                 case 2:
-                    choise = -1L;
-                    System.out.println(UPDATE_ACCOUNT);
-                    System.out.println(ENTER_ID);
-                    id = in.nextLong();
-                    System.out.println(NAME);
-                    name = in.next();
-                    System.out.println(LAST_NAME);
-                    lastName = in.next();
-                    while (choise != 0) {
-                        System.out.println(SELECT_YOUR_SKILLS);
-                        try {
-                            skillController.getAll();
-                            System.out.println(EXIT);
-                            choise = in.nextLong();
-                        } catch (Exception e) {
-                            System.out.println(e);
-                        }
-                        if (choise != 0) {
-                            skillSet.add(skillController.getDataById(choise));
-                        }
-                    }
-                    developerController.updateDeveloperById(id,name, lastName, skillSet);
-                    skillSet.clear();
+//                    choise = -1L;
+//                    System.out.println(UPDATE_ACCOUNT);
+//                    System.out.println(ENTER_ID);
+//                    id = in.nextLong();
+//                    System.out.println(NAME);
+//                    name = in.next();
+//                    System.out.println(LAST_NAME);
+//                    lastName = in.next();
+//                    while (choise != 0) {
+//                        System.out.println(SELECT_YOUR_SKILLS);
+//                        try {
+//                            skillController.getAll();
+//                            System.out.println(EXIT);
+//                            choise = in.nextLong();
+//                        } catch (Exception e) {
+//                            System.out.println(e);
+//                        }
+//                        if (choise != 0) {
+//                            skillSet.add(skillController.getDataById(choise));
+//                        }
+//                    }
+//                    developerController.updateDeveloperById(id,name, lastName, skillSet);
+//                    skillSet.clear();
                     break;
                 case 3:
                     System.out.println(ENTER_ID);

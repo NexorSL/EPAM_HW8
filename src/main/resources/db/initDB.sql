@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS developers (
   id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
   developerName varchar(255) NOT NULL,
   accountId INT(11) NOT NULL,
-  FOREIGN KEY (accountId) REFERENCES accounts (id)
+  FOREIGN KEY (accountId) REFERENCES accounts (id) ON DELETE CASCADE
 );
 
 
@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS developersskills (
   id INT PRIMARY KEY AUTO_INCREMENT UNIQUE NOT NULL,
   developerId INT(11) NOT NULL,
   skillId INT(11) NOT NULL,
-  FOREIGN KEY (developerId) REFERENCES developers (id),
+  FOREIGN KEY (developerId) REFERENCES developers (id) ON DELETE CASCADE,
   FOREIGN KEY (skillId) REFERENCES skills (id)
+  ON DELETE CASCADE
 )

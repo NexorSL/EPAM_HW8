@@ -100,4 +100,22 @@ public class JdbcAccountRepository implements AccountRepository {
         }
         return accountMap;
     }
+
+    public Account getByName(String name){
+        String sql = "Select * from epam.accounts where accountName = ?;";
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, name);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                Account account = new Account(
+                        resultSet.getLong("id"),
+                        resultSet.getString("accountName"),
+                        AccountStatus.valueOf(resultSet.getString("accountStatus")));
+                return account;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }
