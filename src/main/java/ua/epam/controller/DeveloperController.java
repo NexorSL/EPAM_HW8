@@ -19,11 +19,11 @@ public class DeveloperController {
         return developerService.create(developer);
     }
 
-//    public boolean updateDeveloperById(Long id, String name, String lastName, Set<Skill> skillSet) {
-//        Account account = developerRepository.getById(id).getAccount();
-//        Developer developer = new Developer(id, name, lastName, skillSet ,account);
-//        return developerRepository.update(developer, id);
-//    }
+    public boolean updateDeveloperById(Long id, String name, Set<Skill> skillSet) {
+        Account account = developerService.getById(id).getAccount();
+        Developer developer = new Developer(id, name, skillSet ,account);
+        return developerService.update(developer, id);
+    }
 
     public boolean deleteDeveloperById(Long id) {
         return developerService.delete(id);

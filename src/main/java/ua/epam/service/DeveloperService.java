@@ -12,6 +12,11 @@ public class DeveloperService {
         return developerRepository.create(developer);
     }
 
+    public boolean update(Developer developer, Long id){
+        return developerRepository.update(developer, id);
+    }
+
+
     public boolean delete(Long id){
         return developerRepository.delete(id);
     }

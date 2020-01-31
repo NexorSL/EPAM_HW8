@@ -4,7 +4,6 @@ import ua.epam.controller.AccountController;
 import ua.epam.controller.DeveloperController;
 import ua.epam.controller.SkillController;
 import ua.epam.model.Account;
-import ua.epam.model.Developer;
 import ua.epam.model.Skill;
 import ua.epam.repository.ViewRepository;
 
@@ -34,7 +33,6 @@ public class DeveloperView implements ViewRepository {
         int answer = 5;
         Long id;
         String name;
-        String lastName;
         String nickname;
         Long choise;
         Set<Skill> skillSet = new LinkedHashSet<>();
@@ -73,35 +71,33 @@ public class DeveloperView implements ViewRepository {
                     skillSet.clear();
                     break;
                 case 2:
-//                    choise = -1L;
-//                    System.out.println(UPDATE_ACCOUNT);
-//                    System.out.println(ENTER_ID);
-//                    id = in.nextLong();
-//                    System.out.println(NAME);
-//                    name = in.next();
-//                    System.out.println(LAST_NAME);
-//                    lastName = in.next();
-//                    while (choise != 0) {
-//                        System.out.println(SELECT_YOUR_SKILLS);
-//                        try {
-//                            skillController.getAll();
-//                            System.out.println(EXIT);
-//                            choise = in.nextLong();
-//                        } catch (Exception e) {
-//                            System.out.println(e);
-//                        }
-//                        if (choise != 0) {
-//                            skillSet.add(skillController.getDataById(choise));
-//                        }
-//                    }
-//                    developerController.updateDeveloperById(id,name, lastName, skillSet);
-//                    skillSet.clear();
+                    choise = -1L;
+                    System.out.println(UPDATE_ACCOUNT);
+                    System.out.println(ENTER_ID);
+                    id = in.nextLong();
+                    System.out.println(NAME);
+                    name = in.next();
+                    while (choise != 0) {
+                        System.out.println(SELECT_YOUR_SKILLS);
+                        try {
+                            skillController.getAll();
+                            System.out.println(EXIT);
+                            choise = in.nextLong();
+                        } catch (Exception e) {
+                            System.out.println(e);
+                        }
+                        if (choise != 0) {
+                            skillSet.add(skillController.getDataById(choise));
+                        }
+                    }
+                    developerController.updateDeveloperById(id, name, skillSet);
+                    skillSet.clear();
                     break;
                 case 3:
                     System.out.println(ENTER_ID);
                     id = in.nextLong();
                     boolean isDeleted = developerController.deleteDeveloperById(id);
-                    if(isDeleted){
+                    if (isDeleted) {
                         System.out.println("Developer deleted");
                     } else {
                         System.out.println("Developer does not exist");

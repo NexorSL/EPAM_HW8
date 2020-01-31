@@ -67,6 +67,17 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
 
     @Override
     public boolean update(Developer entity, Long id) {
+        String sql = "Update epam.developers set developerName = ? where id = ?;";
+        updateDevSkills(entity, id);
+        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setString(1, entity.getName());
+            statement.setLong(2, id);
+            statement.executeUpdate();
+            addToDevSkills(entity, id);
+            log.info("Developer updated {}", entity);
+        } catch (SQLException e){
+            e.printStackTrace();
+        }
         return false;
     }
 
@@ -132,6 +143,33 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
                 statement.executeUpdate();
             }
             log.info("Developer Skills updated !");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    private boolean addToDevSkills(Developer developer, Long id) {
+        String sql = "insert into developersskills (developerId, skillId) values (" +
+                "?,?);";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            for (Skill skill : developer.getSkills()) {
+                statement.setLong(1, id);
+                statement.setLong(2, skill.getId());
+                statement.executeUpdate();
+            }
+            log.info("Developer Skills updated !");
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    private boolean updateDevSkills(Developer developer, Long id) {
+        String sql = "delete from developersskills where developerId = ?";
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
+            statement.setLong(1, id);
+            statement.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
