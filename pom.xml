@@ -32,12 +32,10 @@
                 <configuration>
                     <changeLogFile>liquibase/changelog.xml</changeLogFile>
                     <driver>com.mysql.cj.jdbc.Driver</driver>
-                    <!--<url>jdbc:mysql://localhost:3306/epam?createDatabaseIfNotExist=true&amp;serverTimezone=UTC</url>-->
-                    <!--<username>Nex</username>-->
-                    <!--<password>123</password>-->
-                    <url>
-                        mysql://f9gbtnxdda4ok7wm:uwg4gmot7ve2nhug@fojvtycq53b2f2kx.chr7pe7iynqr.eu-west-1.rds.amazonaws.com:3306/ingiesd9ogbifcfy?createDatabaseIfNotExist=true&amp;serverTimezone=UTC
+                    <url>jdbc:mysql://eu-cdbr-west-02.cleardb.net/heroku_5052f0b480379d8?createDatabaseIfNotExist=true
                     </url>
+                    <username>b0dc964fa12f36</username>
+                    <password>4d2508c7</password>
                 </configuration>
                 <executions>
                     <execution>
