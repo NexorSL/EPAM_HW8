@@ -66,9 +66,7 @@ public class SkillServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         try {
-            resp.setContentType("text/plain");
-            String reqValue = req.getParameter("id");
-            skillService.delete(Long.parseLong(reqValue));
+            skillService.delete(Long.parseLong(req.getParameter("id")));
             log.info("SkillServlet - DELETE");
         } catch (Exception e) {
             e.printStackTrace();
