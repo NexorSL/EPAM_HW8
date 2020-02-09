@@ -37,6 +37,7 @@
                             <goal>update</goal>
                         </goals>
                         <configuration>
+                            <promptOnNonLocalDatabase>false</promptOnNonLocalDatabase>
                             <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
                         </configuration>
                     </execution>
