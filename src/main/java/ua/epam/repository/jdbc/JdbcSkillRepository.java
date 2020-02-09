@@ -81,7 +81,7 @@ public class JdbcSkillRepository implements SkillRepository {
     @Override
     public Map<Long, Skill> getAll() {
         Map<Long, Skill> skillMap = new HashMap<>();
-        String sql = "Select * from epam.skills;";
+        String sql = "Select * from skills;";
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
