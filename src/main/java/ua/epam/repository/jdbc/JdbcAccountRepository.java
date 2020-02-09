@@ -51,6 +51,7 @@ public class JdbcAccountRepository implements AccountRepository {
         return null;
     }
 
+
     @Override
     public boolean update(Account entity, Long id) {
         String sql = "Update epam.accounts set accountName = ?, accountStatus = ? where id = ?;";

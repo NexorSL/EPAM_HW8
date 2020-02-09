@@ -3,7 +3,9 @@ package ua.epam.controller;
 import ua.epam.model.Skill;
 import ua.epam.service.SkillService;
 
+import java.util.LinkedHashSet;
 import java.util.Map;
+import java.util.Set;
 
 public class SkillController {
     private SkillService skillService = new SkillService();
@@ -26,9 +28,11 @@ public class SkillController {
         return skillService.getById(id);
     }
 
-    public void getAll() {
+    public Set<Skill> getAll() {
         for (Map.Entry<Long, Skill> entry : skillService.getAll().entrySet()) {
             System.out.println(entry.getValue().getId() + " - " + entry.getValue().getName());
         }
+
+        return new LinkedHashSet<>(skillService.getAll().values());
     }
 }

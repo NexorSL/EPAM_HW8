@@ -2,7 +2,6 @@ package ua.epam.repository.jdbc;
 
 import lombok.extern.slf4j.Slf4j;
 import ua.epam.controller.AccountController;
-import ua.epam.controller.SkillController;
 import ua.epam.model.Account;
 import ua.epam.model.Developer;
 import ua.epam.model.Skill;
@@ -16,7 +15,6 @@ import java.util.*;
 public class JdbcDeveloperRepository implements DeveloperRepository {
 
     private Connection connection;
-    private SkillController skillController = new SkillController();
     private AccountController accountController = new AccountController();
 
     public JdbcDeveloperRepository() {
@@ -69,13 +67,13 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
     public boolean update(Developer entity, Long id) {
         String sql = "Update epam.developers set developerName = ? where id = ?;";
         updateDevSkills(entity, id);
-        try(PreparedStatement statement = connection.prepareStatement(sql)) {
+        try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, entity.getName());
             statement.setLong(2, id);
             statement.executeUpdate();
             addToDevSkills(entity, id);
             log.info("Developer updated {}", entity);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return false;
@@ -149,6 +147,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
         }
         return false;
     }
+
     private boolean addToDevSkills(Developer developer, Long id) {
         String sql = "insert into developersskills (developerId, skillId) values (" +
                 "?,?);";
@@ -165,6 +164,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
         }
         return false;
     }
+
     private boolean updateDevSkills(Developer developer, Long id) {
         String sql = "delete from developersskills where developerId = ?";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
