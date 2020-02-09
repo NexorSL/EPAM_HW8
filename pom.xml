@@ -31,6 +31,10 @@
                 <version>3.8.4</version>
                 <executions>
                     <execution>
+                        <id>default-cli</id>
+                        <goals>
+                            <goal>update</goal>
+                        </goals>
                         <configuration>
                             <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
                         </configuration>
