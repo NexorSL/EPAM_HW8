@@ -42,7 +42,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
         String name = "";
         Set<Skill> skillSet = new LinkedHashSet<>();
         Account account = null;
-        String sql = "SELECT d.id, d.developerName, d.accountId, ds.skillId, s.skillName FROM epam.developersskills ds\n" +
+        String sql = "SELECT d.id, d.developerName, d.accountId, ds.skillId, s.skillName FROM developersskills ds\n" +
                 "join developers d on ds.developerId = d.id\n" +
                 "join skills s on ds.skillId = s.id\n" +
                 "where d.id = ?;";
@@ -65,7 +65,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
 
     @Override
     public boolean update(Developer entity, Long id) {
-        String sql = "Update epam.developers set developerName = ? where id = ?;";
+        String sql = "Update developers set developerName = ? where id = ?;";
         updateDevSkills(entity, id);
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, entity.getName());
@@ -81,12 +81,12 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
 
     @Override
     public boolean delete(Long id) {
-        String sql = "delete from epam.accounts where id = (select accountId from epam.developers " +
+        String sql = "delete from accounts where id = (select accountId from developers " +
                 "where id = ?);";
         deleteUtil(sql, id);
-        sql = "delete from epam.developers where id = ?;";
+        sql = "delete from developers where id = ?;";
         deleteUtil(sql, id);
-        sql = "delete from epam.developersskills where id = ?;";
+        sql = "delete from developersskills where id = ?;";
         log.info("Developer from developersskills deleted id = {}", id);
         deleteUtil(sql, id);
 
@@ -101,7 +101,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
         Set<Skill> skillSet = null;
         Account acc = null;
         boolean notEmpty = false;
-        String sql = "SELECT d.id, d.developerName, d.accountId, ds.skillId, s.skillName FROM epam.developersskills ds\n" +
+        String sql = "SELECT d.id, d.developerName, d.accountId, ds.skillId, s.skillName FROM developersskills ds\n" +
                 "join developers d on ds.developerId = d.id\n" +
                 "join skills s on ds.skillId = s.id\n" +
                 "order by d.id;";

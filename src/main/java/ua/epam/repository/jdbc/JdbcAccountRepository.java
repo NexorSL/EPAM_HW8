@@ -21,7 +21,7 @@ public class JdbcAccountRepository implements AccountRepository {
 
     @Override
     public Account create(Account entity) {
-        String sql = "Insert into epam.accounts (accountName, accountStatus) values (?, ?);";
+        String sql = "Insert into accounts (accountName, accountStatus) values (?, ?);";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, entity.getName());
             statement.setString(2, entity.getAccountStatus().toString());
@@ -37,7 +37,7 @@ public class JdbcAccountRepository implements AccountRepository {
     @Override
     public Account getById(Long accountId) {
         Account account;
-        String sql = "SELECT * FROM epam.accounts where id = ?;";
+        String sql = "SELECT * FROM accounts where id = ?;";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, accountId);
             ResultSet resultSet = statement.executeQuery();
@@ -54,7 +54,7 @@ public class JdbcAccountRepository implements AccountRepository {
 
     @Override
     public boolean update(Account entity, Long id) {
-        String sql = "Update epam.accounts set accountName = ?, accountStatus = ? where id = ?;";
+        String sql = "Update accounts set accountName = ?, accountStatus = ? where id = ?;";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, entity.getName());
             statement.setString(2, entity.getAccountStatus().toString());
@@ -70,7 +70,7 @@ public class JdbcAccountRepository implements AccountRepository {
 
     @Override
     public boolean delete(Long id) {
-        String sql = "Delete from epam.accounts where id = ?;";
+        String sql = "Delete from accounts where id = ?;";
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
             statement.executeUpdate();
@@ -85,7 +85,7 @@ public class JdbcAccountRepository implements AccountRepository {
     @Override
     public Map<Long, Account> getAll() {
         Map<Long, Account> accountMap = new HashMap<>();
-        String sql = "Select * from epam.accounts;";
+        String sql = "Select * from accounts;";
         try (Statement statement = connection.createStatement()) {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
@@ -103,7 +103,7 @@ public class JdbcAccountRepository implements AccountRepository {
     }
 
     public Account getByName(String name){
-        String sql = "Select * from epam.accounts where accountName = ?;";
+        String sql = "Select * from accounts where accountName = ?;";
         try(PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, name);
             ResultSet resultSet = statement.executeQuery();

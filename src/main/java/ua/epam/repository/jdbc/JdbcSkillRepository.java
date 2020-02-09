@@ -20,7 +20,7 @@ public class JdbcSkillRepository implements SkillRepository {
 
     @Override
     public Skill create(Skill entity) {
-        String sql = "Insert into epam.skills (skillName) values (?);";
+        String sql = "Insert into skills (skillName) values (?);";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1, entity.getName());
             statement.executeUpdate();
@@ -35,7 +35,7 @@ public class JdbcSkillRepository implements SkillRepository {
     @Override
     public Skill getById(Long id) {
         Skill skill;
-        String sql = "SELECT * FROM epam.skills where id = ?;";
+        String sql = "SELECT * FROM skills where id = ?;";
         try(PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setLong(1, id);
             ResultSet resultSet = statement.executeQuery();
@@ -51,7 +51,7 @@ public class JdbcSkillRepository implements SkillRepository {
 
     @Override
     public boolean update(Skill entity, Long id) {
-        String sql = "Update epam.skills set skillName = ? where id = ?;";
+        String sql = "Update skills set skillName = ? where id = ?;";
         try(PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, entity.getName());
             statement.setLong(2, id);
@@ -66,7 +66,7 @@ public class JdbcSkillRepository implements SkillRepository {
 
     @Override
     public boolean delete(Long id) {
-        String sql = "Delete from epam.skills where id = ?;";
+        String sql = "Delete from skills where id = ?;";
         try(PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
             statement.executeUpdate();
