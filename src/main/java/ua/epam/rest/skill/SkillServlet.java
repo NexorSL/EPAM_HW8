@@ -47,7 +47,7 @@ public class SkillServlet extends HttpServlet {
             skillService.create(gson.fromJson(req.getReader(), Skill.class));
             log.info("SkillServlet - POST");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("SkillServlet: Exeption occured while creating skill");
         }
     }
 
@@ -59,7 +59,7 @@ public class SkillServlet extends HttpServlet {
                     Long.parseLong(req.getParameter("id")));
             log.info("SkillServlet - PUT");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("SkillServlet: Exeption occured while updating skill");
         }
     }
 
@@ -69,7 +69,7 @@ public class SkillServlet extends HttpServlet {
             skillService.delete(Long.parseLong(req.getParameter("id")));
             log.info("SkillServlet - DELETE");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("SkillServlet: Exeption occured while deleting skill");
         }
     }
 }

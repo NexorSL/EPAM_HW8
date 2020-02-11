@@ -36,7 +36,11 @@ public class DeveloperServlet extends HttpServlet {
             out.flush();
             log.info("DeveloperServlet - GET");
         } catch (Exception e) {
-            sendError(resp);
+            PrintWriter out = resp.getWriter();
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("UTF-8");
+            resp.sendError(500);
+            out.flush();
         }
     }
 
@@ -46,7 +50,7 @@ public class DeveloperServlet extends HttpServlet {
             developerService.create(gson.fromJson(req.getReader(), Developer.class));
             log.info("DeveloperServlet - POST");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("DeveloperServlet: Exeption occured while creating developer");
         }
     }
 
@@ -58,7 +62,7 @@ public class DeveloperServlet extends HttpServlet {
                     Long.parseLong(req.getParameter("id")));
             log.info("DeveloperServlet - PUT");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("DeveloperServlet: Exeption occured while updating developer");
         }
     }
 
@@ -70,17 +74,10 @@ public class DeveloperServlet extends HttpServlet {
                 resp.sendError(400, INVALID_ID_PARAMETER);
             } else {
                 developerService.delete(Long.parseLong(req.getParameter("id")));
+                log.info("DeveloperServlet - DELETE");
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("DeveloperServlet: Exeption occured while deleting developer");
         }
-    }
-
-    private void sendError(HttpServletResponse resp) throws IOException {
-        PrintWriter out = resp.getWriter();
-        resp.setContentType("application/json");
-        resp.setCharacterEncoding("UTF-8");
-        resp.sendError(500);
-        out.flush();
     }
 }

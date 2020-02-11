@@ -26,10 +26,10 @@ public class JdbcAccountRepository implements AccountRepository {
             statement.setString(1, entity.getName());
             statement.setString(2, entity.getAccountStatus().toString());
             statement.executeUpdate();
-            log.info("Account created {}", entity);
+            log.info("AccountRepo: Account created {}", entity);
             return entity;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("AccountRepo: Exeption occured while creating account, {}", e);
         }
         return null;
     }
@@ -45,8 +45,9 @@ public class JdbcAccountRepository implements AccountRepository {
                 account = new Account(accountId, resultSet.getString("accountName"), AccountStatus.valueOf(resultSet.getString("accountStatus")));
                 return account;
             }
+            log.info("AccountRepo: Account found by id = {}", accountId);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("AccountRepo: Exeption occured while getting account by id, {}", e);
         }
         return null;
     }
@@ -60,10 +61,10 @@ public class JdbcAccountRepository implements AccountRepository {
             statement.setString(2, entity.getAccountStatus().toString());
             statement.setLong(3, id);
             statement.executeUpdate();
-            log.info("Account updated {}", entity);
+            log.info("AccountRepo: Account updated {}", entity);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("AccountRepo: Exeption occured while updating account, {}", e);
         }
         return false;
     }
@@ -74,10 +75,10 @@ public class JdbcAccountRepository implements AccountRepository {
         try (PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
             statement.executeUpdate();
-            log.info("Account deleted id - {}", id);
+            log.info("AccountRepo: Account deleted id - {}", id);
             return true;
         } catch (SQLException e) {
-            System.out.println(e);
+            log.error("AccountRepo: Exeption occured while deleting account, {}", e);
         }
         return false;
     }
@@ -95,9 +96,10 @@ public class JdbcAccountRepository implements AccountRepository {
                         AccountStatus.valueOf(resultSet.getString("AccountStatus"))
                 ));
             }
+            log.info("AccountRepo: Accounts found");
             return accountMap;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("AccountRepo: Exeption occured while getting all accounts, {}", e);
         }
         return accountMap;
     }
@@ -112,10 +114,11 @@ public class JdbcAccountRepository implements AccountRepository {
                         resultSet.getLong("id"),
                         resultSet.getString("accountName"),
                         AccountStatus.valueOf(resultSet.getString("accountStatus")));
+                log.info("AccountRepo: Account found by name {}", name);
                 return account;
             }
         } catch (SQLException e){
-            e.printStackTrace();
+            log.error("AccountRepo: Exeption occured while getting account by name, {}", e);
         }
         return null;
     }

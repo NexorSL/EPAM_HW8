@@ -48,7 +48,7 @@ public class AccountServlet extends HttpServlet {
             accountService.create(gson.fromJson(req.getReader(), Account.class));
             log.info("AccountServlet - POST");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("AccountServlet: Exeption occured while creating account");
         }
     }
 
@@ -60,7 +60,7 @@ public class AccountServlet extends HttpServlet {
                     Long.parseLong(req.getParameter("id")));
             log.info("AccountServlet - PUT");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("AccountServlet: Exeption occured while updating account");
         }
     }
 
@@ -70,7 +70,7 @@ public class AccountServlet extends HttpServlet {
             accountService.delete(Long.parseLong(req.getParameter("id")));
             log.info("AccountServlet - DELETE");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("AccountServlet: Exeption occured while deleting account");
         }
     }
 }

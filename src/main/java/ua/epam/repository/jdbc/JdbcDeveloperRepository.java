@@ -32,7 +32,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
             log.info("Developer created {}", entity);
             return entity;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("DeveloperRepo: Exeption occured while creating developer, {}", e);
         }
         return null;
     }
@@ -56,9 +56,10 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
                     account = accountController.getAccountById(resultSet.getLong("accountId"));
                 }
             }
+            log.info("DeveloperRepo: developer found by id = {}", id);
             return new Developer(id, name, skillSet, account);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("DeveloperRepo: Exeption occured while getting developer by id, {}", e);
         }
         return null;
     }
@@ -72,9 +73,9 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
             statement.setLong(2, id);
             statement.executeUpdate();
             addToDevSkills(entity, id);
-            log.info("Developer updated {}", entity);
+            log.info("DeveloperRepo: Developer updated {}", entity);
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("DeveloperRepo: Exeption occured while updating developer, {}", e);
         }
         return false;
     }
@@ -87,9 +88,8 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
         sql = "delete from developers where id = ?;";
         deleteUtil(sql, id);
         sql = "delete from developersskills where id = ?;";
-        log.info("Developer from developersskills deleted id = {}", id);
         deleteUtil(sql, id);
-
+        log.info("Developer from developersskills deleted id = {}", id);
         return true;
     }
 
@@ -124,9 +124,10 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
                 }
             }
             developerMap.put(id, new Developer(id, name, skillSet, acc));
+            log.info("DeveloperRepo: developers found");
             return developerMap;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("DeveloperRepo: Exeption occured while getting all developers, {}", e);
         }
         return null;
     }
@@ -140,7 +141,6 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
                 statement.setLong(2, skill.getId());
                 statement.executeUpdate();
             }
-            log.info("Developer Skills updated !");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -157,7 +157,6 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
                 statement.setLong(2, skill.getId());
                 statement.executeUpdate();
             }
-            log.info("Developer Skills updated !");
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -183,6 +182,7 @@ public class JdbcDeveloperRepository implements DeveloperRepository {
             statement.executeUpdate();
             return true;
         } catch (SQLException e) {
+            log.error("DeveloperRepo: Exeption occured while deleting developer, {}", e);
             e.printStackTrace();
         }
         return false;

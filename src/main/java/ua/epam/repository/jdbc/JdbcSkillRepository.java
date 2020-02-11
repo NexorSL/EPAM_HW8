@@ -24,10 +24,10 @@ public class JdbcSkillRepository implements SkillRepository {
         try(PreparedStatement statement = connection.prepareStatement(sql)){
             statement.setString(1, entity.getName());
             statement.executeUpdate();
-            log.info("Skill added {}", entity);
+            log.info("SkillRepo: Skill added {}", entity);
             return entity;
         } catch (SQLException e){
-            e.printStackTrace();
+            log.error("SkillRepo: Exeption occured while creating skill, {}", e);
         }
         return null;
     }
@@ -43,8 +43,9 @@ public class JdbcSkillRepository implements SkillRepository {
                 skill = new Skill(id, resultSet.getString("skillName"));
                 return skill;
             }
+            log.info("SkillRepo: skill found by id = {}", id);
         } catch (SQLException e){
-            e.printStackTrace();
+            log.error("SkillRepo: Exeption occured while getting skill by id, {}", e);
         }
         return null;
     }
@@ -56,10 +57,10 @@ public class JdbcSkillRepository implements SkillRepository {
             statement.setString(1, entity.getName());
             statement.setLong(2, id);
             statement.executeUpdate();
-            log.info("Skill updated {}", entity);
+            log.info("SkillRepo; Skill updated {}", entity);
             return true;
         } catch (SQLException e){
-            e.printStackTrace();
+            log.error("SkillRepo: Exeption occured while updating skill, {}", e);
         }
         return false;
     }
@@ -70,10 +71,10 @@ public class JdbcSkillRepository implements SkillRepository {
         try(PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
             statement.executeUpdate();
-            log.info("Skill deleted id={}", id);
+            log.info("SkillRepo: Skill deleted id={}", id);
             return true;
         } catch (SQLException e){
-            e.printStackTrace();
+            log.error("SkillRepo: Exeption occured while deleting skill, {}", e);
         }
         return false;
     }
@@ -90,9 +91,10 @@ public class JdbcSkillRepository implements SkillRepository {
                         resultSet.getString("skillName")
                 ));
             }
+            log.info("SkillRepo: skills found");
             return skillMap;
         } catch (SQLException e) {
-            e.printStackTrace();
+            log.error("SkillRepo: Exeption occured while getting skills, {}", e);
         }
         return skillMap;
     }
